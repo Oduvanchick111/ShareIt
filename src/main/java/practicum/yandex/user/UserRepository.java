@@ -1,8 +1,11 @@
 package practicum.yandex.user;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Optional;
+
 
 interface UserRepository {
-    List<UserDao> findAll();
+    Collection<UserDao> findAll();
     UserDao save(UserDao user);
+    Optional<UserDao> findUserById(Long id);
 }

@@ -1,9 +1,10 @@
 package practicum.yandex.user;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/users")
@@ -13,12 +14,12 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<UserDao> getAllUsers() {
+    public Collection<UserResponseDto> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @PostMapping
-    public UserDao saveNewUser(@RequestBody UserDao user) {
+    public UserResponseDto saveNewUser(@Valid @RequestBody UserRequestDto user) {
         return userService.saveUser(user);
     }
 }

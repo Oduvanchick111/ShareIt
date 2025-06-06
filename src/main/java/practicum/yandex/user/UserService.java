@@ -1,8 +1,8 @@
 package practicum.yandex.user;
 
-import java.util.List;
+import java.util.Collection;
 
-interface UserService {
-    List<UserDao> getAllUsers();
-    UserDao saveUser(UserDao user);
+public interface UserService {
+    Collection<UserResponseDto> getAllUsers();
+    UserResponseDto saveUser(UserRequestDto userDto);
 }

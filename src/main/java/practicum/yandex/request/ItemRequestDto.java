@@ -1,20 +1,18 @@
 package practicum.yandex.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import practicum.yandex.user.UserDao;
 
 import java.time.LocalDate;
 
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class ItemRequestDao {
+public class ItemRequestDto {
     private Long id;
+    @NotBlank
     private String description;
+    @NotBlank
     private Long requestorId;
+    @Past
     private LocalDate created;
 }

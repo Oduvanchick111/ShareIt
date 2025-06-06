@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import practicum.yandex.Item.ItemDao;
-import practicum.yandex.user.UserDao;
 
 import java.time.LocalDate;
 
@@ -17,7 +15,7 @@ public class BookingDao {
     private Long id;
     private LocalDate start;
     private LocalDate end;
-    private ItemDao item;
-    private UserDao booker;
+    private Long itemId;
+    private Long bookerId;
     private Status status;
 }
