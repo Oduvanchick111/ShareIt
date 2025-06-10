@@ -1,56 +1,61 @@
 package practicum.yandex.Item.repo;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
 import practicum.yandex.Item.model.ItemDao;
-import practicum.yandex.exceptions.ValidateException;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Component
 @Data
 public class ItemRepoImpl implements ItemRepoInterface {
 
     private final Map<Long, ItemDao> allItems = new HashMap<>();
 
     @Override
-    public ItemDao saveItem(ItemDao itemDao) {
+    public ItemDao saveItem(Long ownerId, ItemDao itemDao) {
         itemDao.setId(getNextId());
+        itemDao.setOwnerId(ownerId);
         allItems.put(itemDao.getId(), itemDao);
         return itemDao;
     }
 
     @Override
-    public ItemDao updateItem(ItemDao item, Long ownerId) {
-        if (!item.getOwnerId().equals(ownerId)) {
-            throw new ValidateException("Вы не можете обновить эту вещь");
-        } else {
-            allItems.get(item.getId()).setName(item.getName());
-            allItems.get(item.getId()).setDescription(item.getDescription());
-            allItems.get(item.getId()).setAvailable(item.getAvailable());
+    public ItemDao updateItem(Long itemId, ItemDao item) {
+        ItemDao itemDao = allItems.get(itemId);
+        if (item.getName() != null) {
+            itemDao.setName(item.getName());
+        }
+        if (item.getDescription() != null) {
+            itemDao.setDescription(item.getDescription());
+        }
+        if (item.getAvailable() != null) {
+            itemDao.setAvailable(item.getAvailable());
         }
         return allItems.get(item.getId());
     }
 
     @Override
-    public Optional<ItemDao> getItem(Long itemId) {
+    public Optional<ItemDao> getItemById(Long ownerId, Long itemId) {
         return Optional.ofNullable(allItems.get(itemId));
     }
 
     @Override
-    public Collection<ItemDao> getAllMyItems(Long ownerId) {
+    public Collection<ItemDao> getItemByUserId(Long ownerId) {
         return allItems.values().stream().filter(itemDao -> ownerId.equals(itemDao.getOwnerId())).collect(Collectors.toList());
     }
 
     @Override
-    public Optional<ItemDao> getItemOnText(String text) {
+    public Collection<ItemDao> getItemOnText(Long ownerId, String text) {
         if (text == null || text.isBlank()) {
-            return Optional.empty();
+            return List.of();
         }
         String searchText = text.toLowerCase();
         return allItems.values().stream()
-                .filter(item -> item.getName().toLowerCase().contains(searchText) ||
-                        (item.getDescription() != null && item.getDescription().toLowerCase().contains(searchText)))
-                .findFirst();
+                .filter(item -> (item.getName().toLowerCase().contains(searchText) ||
+                        (item.getDescription().toLowerCase().contains(searchText))) && item.getAvailable().equals(true))
+                .toList();
     }
 
     private Long getNextId() {

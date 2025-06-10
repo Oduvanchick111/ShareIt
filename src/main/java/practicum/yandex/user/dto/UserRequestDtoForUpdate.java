@@ -1,17 +1,18 @@
-package practicum.yandex.user;
+package practicum.yandex.user.dto;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
 
 @Builder
 @Data
-public class UserRequestDto {
+public class UserRequestDtoForUpdate {
     @Email
+    @Nullable
     private String email;
-    @NotBlank
+    @Nullable
     @Size(max = 200)
     private String name;
 }

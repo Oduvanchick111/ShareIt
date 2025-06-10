@@ -1,4 +1,4 @@
-package practicum.yandex.user;
+package practicum.yandex.user.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

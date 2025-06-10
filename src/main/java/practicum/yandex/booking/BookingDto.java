@@ -24,6 +24,7 @@ public class BookingDto {
     private Long bookerId;
     @NotNull
     private Status status;
+
     @AssertTrue(message = "Дата окончания должна быть позже даты начала")
     private boolean isEndAfterStart() {
         return end.isAfter(start);

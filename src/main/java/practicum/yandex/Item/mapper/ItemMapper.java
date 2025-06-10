@@ -27,7 +27,7 @@ public class ItemMapper {
                 .build();
     }
 
-    public static ItemResponseDto toItemResponseDto (ItemDao itemDao) {
+    public static ItemResponseDto toItemResponseDto(ItemDao itemDao) {
         return ItemResponseDto.builder()
                 .id(itemDao.getId())
                 .name(itemDao.getName())

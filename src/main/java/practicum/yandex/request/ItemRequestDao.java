@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import practicum.yandex.user.UserDao;
 
 import java.time.LocalDate;
 

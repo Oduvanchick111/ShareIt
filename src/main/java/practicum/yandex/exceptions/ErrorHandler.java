@@ -18,4 +18,10 @@ public class ErrorHandler {
     public ErrorResponse handleValidateException(final ValidateException exception) {
         return new ErrorResponse("Ошибка валидации", exception.getMessage());
     }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handleEmailAlreadyExistsException(final EmailAlreadyExistsException exception) {
+        return new ErrorResponse("Данный Email уже используется", exception.getMessage());
+    }
 }

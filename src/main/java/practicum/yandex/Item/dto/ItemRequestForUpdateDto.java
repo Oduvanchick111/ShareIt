@@ -1,7 +1,6 @@
 package practicum.yandex.Item.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
@@ -9,17 +8,17 @@ import lombok.Data;
 @Builder
 @Data
 public class ItemRequestForUpdateDto {
-    @NotNull
+    @Nullable
     private Long id;
-    @NotBlank
+    @Nullable
     @Size(max = 200)
     private String name;
-    @NotBlank
+    @Nullable
     @Size(max = 200)
     private String description;
-    @NotNull
+    @Nullable
     private Boolean available;
-    @NotNull
+    @Nullable
     private Long ownerId;
     private Long requestId;
 }

@@ -1,4 +1,4 @@
-package practicum.yandex.user;
+package practicum.yandex.user.dto;
 
 import lombok.Builder;
 import lombok.Data;

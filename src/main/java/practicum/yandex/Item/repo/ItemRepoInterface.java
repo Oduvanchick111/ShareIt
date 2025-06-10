@@ -6,9 +6,13 @@ import java.util.Collection;
 import java.util.Optional;
 
 public interface ItemRepoInterface {
-    ItemDao saveItem(ItemDao itemDao);
-    ItemDao updateItem (ItemDao item, Long ownerId);
-    Optional<ItemDao> getItem(Long itemId);
-    Collection<ItemDao> getAllMyItems(Long ownerId);
-    Optional<ItemDao> getItemOnText (String text);
+    ItemDao saveItem(Long ownerId, ItemDao itemDao);
+
+    ItemDao updateItem(Long itemId, ItemDao item);
+
+    Optional<ItemDao> getItemById(Long ownerId, Long itemId);
+
+    Collection<ItemDao> getItemByUserId(Long ownerId);
+
+    Collection<ItemDao> getItemOnText(Long ownerId, String text);
 }
